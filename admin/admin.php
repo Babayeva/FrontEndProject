@@ -212,7 +212,7 @@
 			</table>
 			<a href="create.php?section=team" class="btn btn-success pull-right">Create</a><br><br><br>
 			<table class="table table-striped table-bordered table-hover">
-				<caption>Team</caption>
+				<caption>Information</caption>
 				<thead>
 					<th>ID</th>
 					<th>Content</th>
@@ -224,7 +224,7 @@
 				<tbody>		
 					<?php
 						if($db_conn) {
-							$sql_select_all = "SELECT * FROM footer";
+							$sql_select_all = "SELECT * FROM information";
 							$query = mysqli_query($db_conn, $sql_select_all);
 							if ($query) {
 								$i = 0;
@@ -234,11 +234,11 @@
 									<tr>
 										<td><?=$id?></td>
 										<td><?=$result['content']?></td>
-										<td><?=$result['title']?></td>
+										<td><?=$result['writer']?></td>
 										<td><?=$result['image_path']?></td>
 										<td><img width="75px" height="75px" src="../assets/images/<?=$result['image_path']?>" alt=""></td>
 										<td>
-
+											<a href="update.php?section=information&id=<?=$id?>" class="btn btn-primary">update</a>
 										</td>										
 									</tr>
 					<?php
@@ -248,7 +248,41 @@
 					?>
 				</tbody>
 			</table>
-			<a href="update.php?section=footer&id=<?=$id?>" class="btn btn-primary">update</a>
+			<table class="table table-striped table-bordered table-hover">
+				<caption>Contact</caption>
+				<thead>
+					<th>ID</th>
+					<th>Mail</th>
+					<th>Adress</th>
+					<th>Phone number</th>
+					<th>Action</th>
+				</thead>
+				<tbody>		
+					<?php
+						if($db_conn) {
+							$sql_select_all = "SELECT * FROM contact";
+							$query = mysqli_query($db_conn, $sql_select_all);
+							if ($query) {
+								$i = 0;
+								while ($result = mysqli_fetch_assoc($query)) {
+									$id = $result['id'];
+					?>
+									<tr>
+										<td><?=$id?></td>
+										<td><?=$result['mail']?></td>
+										<td><?=$result['adress']?></td>
+										<td><?=$result['phone_number']?></td>
+										<td>
+											<a href="update.php?section=contact&id=<?=$id?>" class="btn btn-primary">update</a>
+										</td>										
+									</tr>
+					<?php
+								}
+							}
+						}
+					?>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </body>

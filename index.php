@@ -498,7 +498,7 @@
 		</div><!-- col-md-12 col-lg-3 -->
 	</div><!-- container -->
 </section><!-- guarantee -->
-<footer id="footer">
+<section id="footer">
 	<div class="container">
 		<div class="footer-content row">
 		<?php
@@ -542,15 +542,29 @@
 			<div class="col-sm-3 col-xs-12">
 				<strong class="heading">Our Contacts</strong>
 				<ul class="list-unstyled">
-					<li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:info@startup.ly">info@startup.ly</a></li>
-					<li><i class="fa fa-map-marker" aria-hidden="true"></i>2901 Marmora road, Glassgow, Seattle, WA 98122-1090</li>
-					<li><i class="fa fa-phone" aria-hidden="true"></i>1 - 234-456-7980</li>
+				<?php
+						if($db_conn) {
+							$sql_select_all = "SELECT * FROM contact";
+							$query = mysqli_query($db_conn, $sql_select_all);
+							if ($query) {
+								$i = 0;
+								while ($result = mysqli_fetch_assoc($query)) {
+					?>
+					<li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:<?=$result['mail']?>"><?=$result['mail']?></a></li>
+					<li><i class="fa fa-map-marker" aria-hidden="true"></i><?=$result['adress']?></li>
+					<li><i class="fa fa-phone" aria-hidden="true"></i><?=$result['phone_number']?></li>
+					<?php
+								}
+							}
+						}
+					?>
+	
 				</ul>
 			</div><!-- col-sm-3 col-xs-12 -->
 		</div><!-- footer-content -->
 		<div class="copyright">startup.ly 2014. All rights reserved.</div>
 	</div><!-- container -->
-</footer><!-- footer -->
+</section><!-- section -->
 <div class="up-arrow">
 	<i class="fa fa-angle-up fa-3x"></i>
 </div>
